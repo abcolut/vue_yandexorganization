@@ -1,18 +1,20 @@
 <template>
-  <div id="app">    
-    <Viewer />
+  <div id="app">  
+    <router-view />
+    <about />
   </div>
 </template>
 
 <script>
-  import Viewer from './pages/Viewer.vue'
-
+  import about from "./pages/About.vue"
   export default {
     name: 'App',
-    components: {
-      Viewer
-    }
+    components: {about},
+    mounted(){
+      this.$store.dispatch('org/getOrganizations')
+    },
   }
+
 </script>
 
 <style>

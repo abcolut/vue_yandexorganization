@@ -6,7 +6,7 @@
       class="item"
       @click="$emit('SelectThis', i)" 
     >
-      {{ item.properties.description }}
+      {{ item.properties.name }} | {{ item.properties.description }}
     </div>
   </section>
 </template>

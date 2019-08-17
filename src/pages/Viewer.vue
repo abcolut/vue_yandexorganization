@@ -1,55 +1,58 @@
 <template>
   <section>
-    <h1>Организации</h1>      
+    <h3>Поиск в Яндекс - организаторов</h3>      
     Строка поиска: 
     <input 
       v-model.trim="search"
       type="text"  
-      placeholder="Строка поиска"
+      placeholder="Имя организации"
       @keydown="keyDownFunc"
     >
-    обновление через .5c
+    (обновление через .5c для строки больше 3х символов)
 
-    <selector 
+    <yandexSelector 
       v-if="showSelectForm"
       :items="yandexOrg.features"
       :index="index"
       @SelectThis="SelectIt"
     />
-
-    <description 
+    <addNew 
       v-if="!showSelectForm && index != null"
       :item="yandexOrg.features[index]"
     />
+    <div v-if="1==4"> 
+      {{ yandexOrg }} 
+    </div>
   </section>
 </template>
 
 <script>
   import {mapGetters} from 'vuex';
   import debounce from '../helper/debounce.js'  
-  import selector from './Selector.vue'  
-  import description from './Description.vue'  
+  import yandexSelector from './YandexSelector.vue'  
+  import addNew from './AddNew.vue'  
   export default {
     name: 'Viewer', 
     components:{
-      selector,
-      description
+      yandexSelector,
+      addNew,
     },  
     data(){
       return{
         search: "",
         showSelectForm: false,
+        //showSelectForm: true,
         index: null,
       }
     },   
     computed:{
-      ...mapGetters('yandexOrg', {yandexOrg: 'getAPI'}),      
+      ...mapGetters('yandexOrg', {yandexOrg: 'getYandexOrganizations'}),      
     },
     watch: {
       search: debounce(function (newVal) {
         var debouncedInput = newVal
-        if (debouncedInput.length > 4){
-          this.$store.dispatch("yandexOrg/getAPI", {text: debouncedInput} )
+        if (debouncedInput.length > 3){
+          this.$store.dispatch("yandexOrg/getYandexOrganizations", {text: debouncedInput} )
           //console.log("whatch")
           this.showSelectForm = true
           this.index = 0
@@ -82,13 +85,19 @@
         }
         if (event.keyCode == 13){
           this.showSelectForm = false  
+          //this.setCurrentOrg(this.index)
           return
         }
       },
       SelectIt(index){
         this.showSelectForm = false
         this.index = index
+      //   //this.setCurrentOrg(index)
       },
+      // setCurrentOrg(index){
+      //   this.index = index
+      //   this.$store.commit("yandexOrg/setCurrentOrg", index )        
+      // }
     }
   }
 </script>
