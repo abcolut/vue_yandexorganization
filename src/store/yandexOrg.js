@@ -41,7 +41,6 @@ export default {
 		{ "type": "Feature", "properties": { "name": "Магнит", "description": "ул. Ленина, 130А, микрорайон Адлер, Сочи, Россия", "boundedBy": [ [ 39.90824939, 43.43445395 ], [ 39.91645999, 43.44043707 ] ], "CompanyMetaData": { "id": "1593826877", "name": "Магнит", "address": "Россия, Краснодарский край, Сочи, микрорайон Адлер, улица Ленина, 130А", "url": "http://magnit-info.ru/", "Phones": [ { "type": "phone", "formatted": "8 (800) 200-90-02" } ], "Categories": [ { "class": "supermarket", "name": "Супермаркет" } ], "Hours": { "text": "ежедневно, 7:00–23:30", "Availabilities": [ { "Intervals": [ { "from": "07:00:00", "to": "23:30:00" } ], "Everyday": true } ] } } }, "geometry": { "type": "Point", "coordinates": [ 39.912359, 43.437447 ] } } 
 	] 
 */
-
 		}
 	},
 	getters: {
@@ -64,10 +63,8 @@ export default {
 			//return
 			Vue.http.get( searchString )
 				.then(response => {
-
 					return response.json()						
-				}
-				)
+				})
 				.then(data => {
 					//console.log("getYandexOrganizations ", data);
 					state.commit('getYandexOrganizations', data)

@@ -14,7 +14,6 @@
       this.$store.dispatch('org/getOrganizations')
     },
   }
-
 </script>
 
 <style>

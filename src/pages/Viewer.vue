@@ -85,19 +85,13 @@
         }
         if (event.keyCode == 13){
           this.showSelectForm = false  
-          //this.setCurrentOrg(this.index)
           return
         }
       },
       SelectIt(index){
         this.showSelectForm = false
         this.index = index
-      //   //this.setCurrentOrg(index)
       },
-      // setCurrentOrg(index){
-      //   this.index = index
-      //   this.$store.commit("yandexOrg/setCurrentOrg", index )        
-      // }
     }
   }
 </script>
